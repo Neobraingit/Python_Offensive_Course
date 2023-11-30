@@ -1,8 +1,10 @@
 
 #!/usr/bin/env python3
 import os
+from gestor_notas import GestorNotas
 
 def main():
+    gestor = GestorNotas()
     while True:
         print (f'\n----------------\nMENÚ\n----------------')
         print ('1. Agregar una nota')
@@ -14,6 +16,7 @@ def main():
         opcion = input('\nEscoge una opción: ')
         if opcion == '1':
             contenido = input('\n[+] Contenido de la nota: ')
+            gestor.agregar_nota(contenido)
         elif opcion == '5':
             break
         else:
