@@ -17,6 +17,22 @@ def main():
         if opcion == '1':
             contenido = input('\n[+] Contenido de la nota: ')
             gestor.agregar_nota(contenido)
+        elif opcion == '2':
+            notas  = gestor.leer_notas()
+            print ('\n[+] Mostrando todas las notas...')
+            for i, nota in enumerate(notas):
+                print (f'{i} : {nota}')
+        elif opcion == '4':
+            index = int(input('\n[+] Introduce el índice de la nota que quuieres borrar: '))
+            gestor.eliminar_nota(index)
+        elif opcion == '3':
+            texto_busqueda = input('\n[+] Introduce el texto a buscar: ')
+            notas = gestor.buscar_nota(texto_busqueda)
+            
+            print ('\n [+] Mostrando las notas que coninciden con el criterio de búsqueda...')
+            for i, nota in enumerate (notas):
+                print (f'{i} : {nota}')
+            
         elif opcion == '5':
             break
         else:

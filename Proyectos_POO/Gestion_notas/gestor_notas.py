@@ -21,3 +21,17 @@ class GestorNotas:
     def agregar_nota (self, contenido):
         self.notas.append(Nota(contenido))
         self.guardar_notas()
+        
+    def leer_notas(self):
+        return self.notas
+    
+    def buscar_nota(self, texto_busqueda):
+        return [nota for nota in self.notas if nota.conincide(texto_busqueda)]
+    
+    def eliminar_nota(self, index):
+        if index < len(self.notas):
+            del self.notas[index]
+            self.guardar_notas()
+        else:
+            print ('\n[!] El índice proporcionado es incorrecto....')
+        
