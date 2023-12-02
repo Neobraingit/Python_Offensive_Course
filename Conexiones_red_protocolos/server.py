@@ -3,18 +3,23 @@
 
 import socket
 
-server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # aceptamos conexiones entrantes 
-server_addres= ('localhost', 1234) # definimos la direccion y el puerto de escucha
-server_socket.bind(server_addres) 
+def start_server():
+    host = 'localhost'
+    port = 1234
+    
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.bind((host, port))
+        print (f'\n[+] Servidor en escucha en {host} : {port}')
+        s.listen(1)
+        conn, addr = s.accept()
+        
+        with conn:
+            print (f'\n[+] Se ha conectado un nuevo cliente: {addr}')
+            while True:
+                data = conn.recv(1024)
+                if not data:
+                    break
+                conn.sendall(data)
 
-# Límite de conexiones
-server_socket.listen(1)
-while True:
-    client_socket, client_address = server_socket.accept()
-    data = client_socket.recv(1024)
-    
-    print (f'\n[+] Mensaje recibido del cliente: {data.decode()}')
-    print (f'\n[+] Información del cliente que se ha conectado: {client_address}')
-    
-    client_socket.sendall(f'Un saludo crack\n'.encode())
-    client_socket.close()
+
+start_server()

@@ -2,16 +2,17 @@
 #!/usr/bin/env python3
 import socket
 
-client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server_address = ('localhost', 1234)
-client_socket.connect(server_address)
-
-try:
-    message = b'Este es un mensaje de prueba que estpy enviando al servidor'
-    client_socket.sendall(message)
-    data = client_socket.recv(1024)
+def start_client():
+    host = 'localhost'
+    port = 1234
     
-    print (f'\n[+] El servidor nos ha respondido con este mensaje: {data.decode()}')
+    with socket.socker(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.connect((host, port))
+        s.sendall(b'Hola, servidor')
+        data = s.recv(1024)
+        
+    print (f'\n[+] Mensaje recibido del servidor: {data.decode()}')
+        
     
-finally:
-    client_socket.close()
+    
+start_client()
